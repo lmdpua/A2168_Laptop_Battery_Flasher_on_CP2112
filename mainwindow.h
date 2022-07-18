@@ -11,7 +11,6 @@
 #include "A2168_interface.h"
 
 
-
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -63,14 +62,12 @@ private slots:
     void on_button_SaveFlashDataToFile_clicked();
     bool saveToFile(QString *pathToFile, QByteArray *dataToSave);
     bool readFromFile(QString *pathToFile, QByteArray *dataFromFile);
-
-
-
     void on_button_LoadFlashDataFromFile_clicked();
-
     void on_button_Search_clicked();
-
     void on_lineEdit_Search_editingFinished();
+
+    void sendCommand(quint16 command);
+    void on_button_DevicePartNumber_clicked();
 
 private:
     Ui::MainWindow *ui;
