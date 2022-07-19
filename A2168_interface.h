@@ -348,6 +348,139 @@ const FUNCTION list_System_Setting[14] =
     {SECTOR_0,	"Power",        233,	"Sealed Ship Delay",        U1,	0,      255,	10, 	"s"   },
 };
 
+/***********************BITS************************/
+
+struct BITS
+{
+    QString name;
+    QString tooltip;
+};
+
+//(0x46)
+const BITS FETControl [16]=
+{
+    {"RSVD",    ""},
+    {"DSG",     "Discharge FET Control\nDSG FET does not turn off in charge mode to protect the FET body diode"},
+    {"CHG",     "Charge FET Control\nCHG FET does not turn off in discharge mode to protect the FET body diode"},
+    {"PCHG",    "Pre-charge FET control"},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+};
+
+//(0x4f)
+const BITS StateOfHealth [16]=
+{
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"DetW",    "Deterioration Warning\n1 = Capacity of the pack fallen below Deterioration Warn Limit threshold"},
+    {"DetF",    "Deterioration Fault\n1 = Capacity of the pack fallen below Deterioration Fault Limit Threshold"},
+    {"CLL",     "Cell Life Limit\n1 = Capacity of the pack fallen below Cell Life Limit threshold"},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""}
+};
+//0x51
+const BITS SafetyAlarm1 [16]=
+{
+    {"SCD",     "Discharge short-circuit condition"},
+    {"SCC",     "Charge short-circuit condition"},
+    {"AOCD",    "Abnormal discharge overcurrent condition"},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"FBO",     "Fuse blowout condition"},
+    {"COV",     "Cell overvoltage condition"},
+    {"CUV",     "Cell undervoltage condition"},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"OCC",     "Charge overcurrent condition"},
+    {"OCD",     "Discharge overcurrent condition"},
+    {"OT1C",    "Charge overtemperature on THM1 condition"},
+    {"OT1D",    "Discharge overtemperature on THM1 condition"}
+};
+
+//0x53
+const BITS PFAlarm1 [16]=
+{
+    {"PFIN",    "External Input Indication of permanent failure"},
+    {"POV",     "PF Overvoltage permanent failure"},
+    {"POT1C",   "Charge PF Overtemperature on T1 permanent failure"},
+    {"POT1D",   "Discharge PF Overtemperature on T1 permanent failure"},
+    {"CIM_R",   "Cell-Imbalance (At Rest method) permanent failure"},
+    {"CFETF",   "Charge-FET-Failure permanent failure"},
+    {"DFETF",   "Discharge-FET-Failure permanent failure"},
+    {"FMF",     "Flash memory failure"},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"POCC",    "Charge PF Overcurrent permanent failure"},
+    {"POCD",    "Discharge PF Overcurrent permanent failure"},
+    {"RSVD",    ""},
+    {"PUV",     "PF Undervoltage permanent failure"},
+    {"RSVD",    ""},
+    {"RSVD",    ""}
+};
+
+//0x54
+const BITS OperationStatus [16]=
+{
+    {"GGEN",    "Gas gauge function is enabled"},
+    {"VOK",     ""},
+    {"R_DIS",   ""},
+    {"DSGIN",   "Discharge inhibited due to a high temperature issue"},
+    {"XDSGI",   "Discharge disabled due to a current issue"},
+    {"XDSG",    "Discharge fault"},
+    {"DSG",     "Replica of the SBS:BatteryStatus(0x16)[DSG] flag"},
+    {"WAKE",    "A2168 in WAKE mode"},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"LDMD",    "Load mode, 0 = constant current, 1 = constant power"},
+    {"RSVD",    ""},
+    {"CSV",     ""},
+    {"SS",      "Sealed security mode"},
+    {"FAS",     "Full access security mode"},
+    {"PRES",    "PRS is low, indicating that the system is present (battery inserted)."}
+};
+
+//0x55
+const BITS ChargingStatus [16]=
+{
+    {"RSVD",    ""},
+    {"OC",      "Overcharge fault"},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"CB",      "Cell balancing in progress"},
+    {"RSVD",    ""},
+    {"HTCHG",   "High temperature charging"},
+    {"ST2CHG",  "Standard temperature charging 2"},
+    {"ST1CHG",  "Standard temperature charging 1"},
+    {"LTCHG",   "Low temperature charging"},
+    {"MCHG",    "Maintenance charging"},
+    {"PCHG",    "Precharging"},
+    {"CHSUSP",  "Charging suspended"},
+    {"XCHG",    "Charging disabled"},
+};
+
 
     bool readFlash(CP2112 *dev, SMBus *batt, QByteArray *flashArray);
     bool readSector(CP2112 *dev, SMBus *batt, quint8 sectorID, QByteArray *sectorArray);

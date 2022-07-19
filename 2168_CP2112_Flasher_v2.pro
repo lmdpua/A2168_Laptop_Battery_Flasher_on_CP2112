@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     A2168_interface.cpp \
     Buttons_QuickCommands.cpp \
+    Tab_BitFlags.cpp \
     Tab_ExtendedUnseal.cpp \
     Tab_Flash_Memory.cpp \
     Tab_Read_Write.cpp \

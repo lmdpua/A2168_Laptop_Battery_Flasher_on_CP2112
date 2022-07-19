@@ -54,6 +54,7 @@ private slots:
 
     void on_button_ExtendedUnseal_ReadOnce_clicked();
 
+    /*     Flash Data    */
     void on_button_ReadFlash_clicked();
     void on_button_WriteFlash_clicked();
     void onTableFlashMemoryCellClicked(const QModelIndex &current,const QModelIndex &previous);
@@ -66,8 +67,36 @@ private slots:
     void on_button_Search_clicked();
     void on_lineEdit_Search_editingFinished();
 
-    void sendCommand(quint16 command);
+    /*     Quick Connands    */
+    void sendCommand(quint16 command, bool answer);
     void on_button_DevicePartNumber_clicked();
+    void on_button_FW_Version_clicked();
+    void on_button_HW_Version_clicked();
+    void on_button_Chemistry_ID_clicked();
+    void on_button_Shutdown_clicked();
+    void on_button_Sleep_clicked();
+    void on_button_Seal_clicked();
+    void on_button_Gas_Gauge_Enable_clicked();
+    void on_button_FUSO_Activation_clicked();
+    void on_button_FUSO_Clear_clicked();
+    void on_button_LEDs_On_clicked();
+    void on_button_LEDs_Off_clicked();
+    void on_button_Display_On_clicked();
+    void on_button_Calibration_Mode_clicked();
+    void on_button_Reset_clicked();
+    void on_button_BootROM_clicked();
+
+    /*     FET Control    */
+    void FET(quint8 fet, bool on);
+    void on_button_PFET_On_clicked();
+    void on_button_PFET_Off_clicked();
+    void on_button_CFET_On_clicked();
+    void on_button_CFET_Off_clicked();
+    void on_button_DFET_On_clicked();
+    void on_button_DFET_Off_clicked();
+
+
+    void setTableBitFlags (QTableView *tablePlace, QStandardItemModel *&tableName, const struct BITS *bits);
 
 private:
     Ui::MainWindow *ui;
@@ -89,6 +118,13 @@ private:
     QStandardItemModel *tableExtendedUnseal_Right;
 
     QStandardItemModel *tableFlashMemory;
+
+    QStandardItemModel *tableFETControl;
+    QStandardItemModel *tableStateOfHealth;
+    QStandardItemModel *tableSafetyAlarm1;
+    QStandardItemModel *tablePFAlarm1;
+    QStandardItemModel *tableOperationStatus;
+    QStandardItemModel *tableChargingStatus;
 
 };
 #endif // MAINWINDOW_H

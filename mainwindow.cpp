@@ -61,14 +61,17 @@ MainWindow::MainWindow(QWidget *parent)
 
     setTableFlashMemory(ui->tableViewFlashMemory, tableFlashMemory);
 
-    //Реакция на клик по таблице Flesh Memory
+    //Реакция на клик по таблице Flash Memory
     connect(ui->tableViewFlashMemory->selectionModel(),
             SIGNAL(currentChanged(QModelIndex, QModelIndex)), this,
             SLOT(onTableFlashMemoryCellClicked(QModelIndex, QModelIndex)));
-//    connect(ui->tableViewFlashMemory->model(),
-//            SIGNAL(dataChanged(QModelIndex, QModelIndex)), this,
-//            ;
 
+    setTableBitFlags(ui->tableViewFETControl, tableFETControl, FETControl);
+    setTableBitFlags(ui->tableViewStateOfHealth, tableStateOfHealth, StateOfHealth);
+    setTableBitFlags(ui->tableViewSafetyAlarm1, tableSafetyAlarm1, SafetyAlarm1);
+    setTableBitFlags(ui->tableViewPFAlarm1, tablePFAlarm1, PFAlarm1);
+    setTableBitFlags(ui->tableViewOperationStatus, tableOperationStatus, OperationStatus);
+    setTableBitFlags(ui->tableViewChargingStatus, tableChargingStatus, ChargingStatus);
 }
 
 MainWindow::~MainWindow()
@@ -113,18 +116,6 @@ void MainWindow::slotTimerStatusBarAlarm()
     device.close();
     device.setTransfer(false); //Снимаем флаг, что устройство в режиме передачи
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
