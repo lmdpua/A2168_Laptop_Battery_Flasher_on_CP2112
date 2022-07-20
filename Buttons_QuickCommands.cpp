@@ -20,7 +20,7 @@ enum QuickCommands{
     Display_On          = 0x0034,
     Calibration_Mode    = 0x0040,
     Reset               = 0x0041,
-    BootROM             = 0x0f00
+    BootROM             = 0x0046
 };
 
 void MainWindow::sendCommand(quint16 command, bool answer)

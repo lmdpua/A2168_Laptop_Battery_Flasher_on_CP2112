@@ -360,9 +360,9 @@ struct BITS
 const BITS FETControl [16]=
 {
     {"RSVD",    ""},
-    {"DSG",     "Discharge FET Control\nDSG FET does not turn off in charge mode to protect the FET body diode"},
-    {"CHG",     "Charge FET Control\nCHG FET does not turn off in discharge mode to protect the FET body diode"},
-    {"PCHG",    "Pre-charge FET control"},
+    {"DSG",     "Discharge FET Control\n0 = Turn OFF DSG FET. DSG FET does not turn off in charge mode to protect the FET body diode\n1 = Turn ON DSG FET"},
+    {"CHG",     "Charge FET Control\n0 = Turn OFF CHG FET. CHG FET does not turn off in discharge mode to protect the FET body diode\n1 = Turn ON CHG FET"},
+    {"PCHG",    "Pre-charge FET control\n0 = Turn OFF pre-charge FET\n1 = Turn ON pre-charge FET"},
     {"RSVD",    ""},
     {"RSVD",    ""},
     {"RSVD",    ""},
@@ -380,14 +380,14 @@ const BITS FETControl [16]=
 //(0x4f)
 const BITS StateOfHealth [16]=
 {
-    {"RSVD",    ""},
-    {"RSVD",    ""},
-    {"RSVD",    ""},
-    {"RSVD",    ""},
-    {"RSVD",    ""},
-    {"RSVD",    ""},
-    {"RSVD",    ""},
-    {"RSVD",    ""},
+    {"StOH",    "State of Health %"},
+    {"StOH",    "State of Health %"},
+    {"StOH",    "State of Health %"},
+    {"StOH",    "State of Health %"},
+    {"StOH",    "State of Health %"},
+    {"StOH",    "State of Health %"},
+    {"StOH",    "State of Health %"},
+    {"StOH",    "State of Health %"},
     {"DetW",    "Deterioration Warning\n1 = Capacity of the pack fallen below Deterioration Warn Limit threshold"},
     {"DetF",    "Deterioration Fault\n1 = Capacity of the pack fallen below Deterioration Fault Limit Threshold"},
     {"CLL",     "Cell Life Limit\n1 = Capacity of the pack fallen below Cell Life Limit threshold"},
@@ -397,44 +397,45 @@ const BITS StateOfHealth [16]=
     {"RSVD",    ""},
     {"RSVD",    ""}
 };
+
 //0x51
 const BITS SafetyAlarm1 [16]=
 {
-    {"SCD",     "Discharge short-circuit condition"},
-    {"SCC",     "Charge short-circuit condition"},
-    {"AOCD",    "Abnormal discharge overcurrent condition"},
+    {"SCD",     "1=Discharge short-circuit condition"},
+    {"SCC",     "1=Charge short-circuit condition"},
+    {"AOCD",    "1=Abnormal discharge overcurrent condition"},
     {"RSVD",    ""},
     {"RSVD",    ""},
-    {"FBO",     "Fuse blowout condition"},
-    {"COV",     "Cell overvoltage condition"},
-    {"CUV",     "Cell undervoltage condition"},
+    {"FBO",     "1=Fuse blowout condition"},
+    {"COV",     "1=Cell overvoltage condition"},
+    {"CUV",     "1=Cell undervoltage condition"},
     {"RSVD",    ""},
     {"RSVD",    ""},
     {"RSVD",    ""},
     {"RSVD",    ""},
-    {"OCC",     "Charge overcurrent condition"},
-    {"OCD",     "Discharge overcurrent condition"},
-    {"OT1C",    "Charge overtemperature on THM1 condition"},
-    {"OT1D",    "Discharge overtemperature on THM1 condition"}
+    {"OCC",     "1=Charge overcurrent condition"},
+    {"OCD",     "1=Discharge overcurrent condition"},
+    {"OT1C",    "1=Charge overtemperature on THM1 condition"},
+    {"OT1D",    "1=Discharge overtemperature on THM1 condition"}
 };
 
 //0x53
 const BITS PFAlarm1 [16]=
 {
-    {"PFIN",    "External Input Indication of permanent failure"},
-    {"POV",     "PF Overvoltage permanent failure"},
-    {"POT1C",   "Charge PF Overtemperature on T1 permanent failure"},
-    {"POT1D",   "Discharge PF Overtemperature on T1 permanent failure"},
-    {"CIM_R",   "Cell-Imbalance (At Rest method) permanent failure"},
-    {"CFETF",   "Charge-FET-Failure permanent failure"},
-    {"DFETF",   "Discharge-FET-Failure permanent failure"},
-    {"FMF",     "Flash memory failure"},
+    {"PFIN",    "1=External Input Indication of permanent failure"},
+    {"POV",     "1=PF Overvoltage permanent failure"},
+    {"POT1C",   "1=Charge PF Overtemperature on T1 permanent failure"},
+    {"POT1D",   "1=Discharge PF Overtemperature on T1 permanent failure"},
+    {"CIM_R",   "1=Cell-Imbalance (At Rest method) permanent failure"},
+    {"CFETF",   "1=Charge-FET-Failure permanent failure"},
+    {"DFETF",   "1=Discharge-FET-Failure permanent failure"},
+    {"FMF",     "1=Flash memory failure"},
     {"RSVD",    ""},
     {"RSVD",    ""},
-    {"POCC",    "Charge PF Overcurrent permanent failure"},
-    {"POCD",    "Discharge PF Overcurrent permanent failure"},
+    {"POCC",    "1=Charge PF Overcurrent permanent failure"},
+    {"POCD",    "1=Discharge PF Overcurrent permanent failure"},
     {"RSVD",    ""},
-    {"PUV",     "PF Undervoltage permanent failure"},
+    {"PUV",     "1=PF Undervoltage permanent failure"},
     {"RSVD",    ""},
     {"RSVD",    ""}
 };
@@ -442,43 +443,106 @@ const BITS PFAlarm1 [16]=
 //0x54
 const BITS OperationStatus [16]=
 {
-    {"GGEN",    "Gas gauge function is enabled"},
+    {"GGEN",    "1=Gas gauge function is enabled"},
     {"VOK",     ""},
     {"R_DIS",   ""},
-    {"DSGIN",   "Discharge inhibited due to a high temperature issue"},
-    {"XDSGI",   "Discharge disabled due to a current issue"},
-    {"XDSG",    "Discharge fault"},
+    {"DSGIN",   "1=Discharge inhibited due to a high temperature issue"},
+    {"XDSGI",   "1=Discharge disabled due to a current issue"},
+    {"XDSG",    "1=Discharge fault"},
     {"DSG",     "Replica of the SBS:BatteryStatus(0x16)[DSG] flag"},
-    {"WAKE",    "A2168 in WAKE mode"},
+    {"WAKE",    "1=A2168 in WAKE mode"},
     {"RSVD",    ""},
     {"RSVD",    ""},
-    {"LDMD",    "Load mode, 0 = constant current, 1 = constant power"},
+    {"LDMD",    "1=Load mode, 0 = constant current, 1 = constant power"},
     {"RSVD",    ""},
     {"CSV",     ""},
-    {"SS",      "Sealed security mode"},
-    {"FAS",     "Full access security mode"},
-    {"PRES",    "PRS is low, indicating that the system is present (battery inserted)."}
+    {"SS",      "1=Sealed security mode"},
+    {"FAS",     "0=Full access security mode"},
+    {"PRES",    "1=PRS is low, indicating that the system is present (battery inserted)."}
 };
 
 //0x55
 const BITS ChargingStatus [16]=
 {
     {"RSVD",    ""},
-    {"OC",      "Overcharge fault"},
+    {"OC",      "1=Overcharge fault"},
     {"RSVD",    ""},
     {"RSVD",    ""},
     {"RSVD",    ""},
     {"RSVD",    ""},
-    {"CB",      "Cell balancing in progress"},
+    {"CB",      "1=Cell balancing in progress"},
     {"RSVD",    ""},
     {"HTCHG",   "High temperature charging"},
-    {"ST2CHG",  "Standard temperature charging 2"},
-    {"ST1CHG",  "Standard temperature charging 1"},
-    {"LTCHG",   "Low temperature charging"},
-    {"MCHG",    "Maintenance charging"},
-    {"PCHG",    "Precharging"},
-    {"CHSUSP",  "Charging suspended"},
-    {"XCHG",    "Charging disabled"},
+    {"ST2CHG",  "1=Standard temperature charging 2"},
+    {"ST1CHG",  "1=Standard temperature charging 1"},
+    {"LTCHG",   "1=Low temperature charging"},
+    {"MCHG",    "1=Maintenance charging"},
+    {"PCHG",    "1=Precharging"},
+    {"CHSUSP",  "1=Charging suspended"},
+    {"XCHG",    "1=Charging disabled"},
+};
+
+//0x69
+const BITS SafetyAlarm2 [16]=
+{
+    {"OT2C",    "1=Charge overtermperature condition on THM2"},
+    {"OT2D",    "1=Discharge overtemperature condition on THM2"},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+};
+
+//0x6b
+const BITS PFAlarm2 [16]=
+{
+    {"CIM_C",    "1=Cell-Imbalance (Charge method) permanent failure"},
+    {"POT2C",    "1=Charge PF Overtemperature in THM2 permanent failure"},
+    {"POT2D",    "1=Discharge PF Overtemperature on THM2 permanent failure"},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+};
+
+//0x72
+const BITS TempRange [16]=
+{
+    {"TR1",     "1=temperature range 1: Temperature < JT1"},
+    {"TR2",     "1=temperature range 2: JT1 ≦ Temperature < JT2"},
+    {"TR2A",    "1=temperature range 3: JT2 ≦ Temperature < JT2a"},
+    {"TR3",     "1=temperature range 4: JT2a ≦ Temperature < JT3"},
+    {"TR4",     "1=temperature range 5: JT3 ≦ Temperature < JT4"},
+    {"TR5",     "1=temperature range 6: JT4 ≦ Temperature"},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
+    {"RSVD",    ""},
 };
 
 

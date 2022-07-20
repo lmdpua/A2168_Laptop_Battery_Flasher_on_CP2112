@@ -202,42 +202,17 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
-        <width>401</width>
+        <y>10</y>
+        <width>791</width>
         <height>511</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="3" column="0">
-        <widget class="QTableView" name="tableViewStateOfHealth">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>42</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>8</pointsize>
-          </font>
-         </property>
-         <property name="toolTip">
-          <string/>
-         </property>
-         <property name="toolTipDuration">
-          <number>-1</number>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_5">
-         <property name="text">
-          <string>State Of Health (0x4f)</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QTableView" name="tableViewSafetyAlarm1">
+       <property name="verticalSpacing">
+        <number>3</number>
+       </property>
+       <item row="7" column="0">
+        <widget class="QTableView" name="tableViewPFAlarm1">
          <property name="maximumSize">
           <size>
            <width>16777215</width>
@@ -251,10 +226,10 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="label_6">
+       <item row="2" column="1">
+        <widget class="QLabel" name="label_SafetyAlarm2">
          <property name="text">
-          <string>Safety Alarm1 (0x51)</string>
+          <string>Safety Alarm 2 (0x69)</string>
          </property>
         </widget>
        </item>
@@ -280,41 +255,35 @@
         </widget>
        </item>
        <item row="0" column="0">
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="label_FETControl">
          <property name="text">
           <string>FET Control (0x46)</string>
          </property>
         </widget>
        </item>
-       <item row="10" column="0">
-        <widget class="QLabel" name="label_9">
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_PFAlarm1">
          <property name="text">
-          <string>ChargingStatus (0x55)</string>
+          <string>PF Alarm 1 (0x53)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1">
+        <widget class="QLabel" name="label_ChargingStatus">
+         <property name="text">
+          <string>Charging Status (0x55)</string>
          </property>
         </widget>
        </item>
        <item row="8" column="0">
-        <widget class="QLabel" name="label_8">
+        <widget class="QLabel" name="label_OperationStatus">
          <property name="text">
           <string>Operation Status (0x54)</string>
          </property>
         </widget>
        </item>
-       <item row="12" column="0">
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="7" column="0">
-        <widget class="QTableView" name="tableViewPFAlarm1">
+       <item row="3" column="0">
+        <widget class="QTableView" name="tableViewSafetyAlarm1">
          <property name="maximumSize">
           <size>
            <width>16777215</width>
@@ -328,12 +297,156 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="0">
-        <widget class="QLabel" name="label_7">
+       <item row="0" column="1">
+        <widget class="QLabel" name="label_TempRange">
          <property name="text">
-          <string>PF Alarm1 (0x53)</string>
+          <string>Temp Range (0x72)</string>
          </property>
         </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QTableView" name="tableViewTempRange">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>42</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>8</pointsize>
+          </font>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QTableView" name="tableViewSafetyAlarm2">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>42</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>8</pointsize>
+          </font>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_SafetyAlarm1">
+         <property name="text">
+          <string>Safety Alarm 1 (0x51)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="1">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>State Of Health (0x4f) Low Byte detailed</string>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="0">
+        <widget class="QTableView" name="tableViewStateOfHealth">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>42</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>8</pointsize>
+          </font>
+         </property>
+         <property name="toolTip">
+          <string/>
+         </property>
+         <property name="toolTipDuration">
+          <number>-1</number>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QLabel" name="label_PFAlarm2">
+         <property name="text">
+          <string>PF Alarm 2 (0x6b)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="0">
+        <widget class="QLabel" name="label_StateOfHealth">
+         <property name="text">
+          <string>State Of Health (0x4f)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QTableView" name="tableViewPFAlarm2">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>42</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>8</pointsize>
+          </font>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <widget class="QLabel" name="label_StateOfHealth_2">
+           <property name="text">
+            <string>State of Health %   </string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_StateOFHealth">
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="16" column="0">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item row="9" column="0">
         <widget class="QTableView" name="tableViewOperationStatus">
@@ -350,7 +463,7 @@
          </property>
         </widget>
        </item>
-       <item row="11" column="0">
+       <item row="9" column="1">
         <widget class="QTableView" name="tableViewChargingStatus">
          <property name="maximumSize">
           <size>
@@ -364,6 +477,37 @@
           </font>
          </property>
         </widget>
+       </item>
+       <item row="14" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_10">
+         <item>
+          <widget class="QPushButton" name="button_ReadOnceBits">
+           <property name="text">
+            <string>Read Once</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="button_ReadAllTheTimeBits">
+           <property name="text">
+            <string>Read All The Time</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>

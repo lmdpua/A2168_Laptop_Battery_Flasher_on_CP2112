@@ -97,6 +97,9 @@ private slots:
 
 
     void setTableBitFlags (QTableView *tablePlace, QStandardItemModel *&tableName, const struct BITS *bits);
+    void on_button_ReadOnceBits_clicked();
+    void on_button_ReadAllTheTimeBits_clicked();
+    bool setDataTableBits(QStandardItemModel *&tableName, quint16 command);
 
 private:
     Ui::MainWindow *ui;
@@ -125,6 +128,9 @@ private:
     QStandardItemModel *tablePFAlarm1;
     QStandardItemModel *tableOperationStatus;
     QStandardItemModel *tableChargingStatus;
+    QStandardItemModel *tableSafetyAlarm2;
+    QStandardItemModel *tablePFAlarm2;
+    QStandardItemModel *tableTempRange;
 
 };
 #endif // MAINWINDOW_H

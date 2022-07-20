@@ -44,7 +44,7 @@ bool SMBus::addressReadRequest(CP2112 *dev, quint8 reg, QByteArray *dataArray, q
     dev->setStatus_1(status1);
 
     if(status != HID_SMBUS_SUCCESS)return false;
-//    if(status0 == HID_SMBUS_S0_ERROR)return false;
+    if(status0 == HID_SMBUS_S0_ERROR)return false;
 //    if(bytesRead!=dataLen)return false;
     }while(status0);
 

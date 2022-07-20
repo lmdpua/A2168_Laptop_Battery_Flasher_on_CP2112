@@ -72,6 +72,9 @@ MainWindow::MainWindow(QWidget *parent)
     setTableBitFlags(ui->tableViewPFAlarm1, tablePFAlarm1, PFAlarm1);
     setTableBitFlags(ui->tableViewOperationStatus, tableOperationStatus, OperationStatus);
     setTableBitFlags(ui->tableViewChargingStatus, tableChargingStatus, ChargingStatus);
+    setTableBitFlags(ui->tableViewSafetyAlarm2, tableSafetyAlarm2, SafetyAlarm2);
+    setTableBitFlags(ui->tableViewPFAlarm2, tablePFAlarm2, PFAlarm2);
+    setTableBitFlags(ui->tableViewTempRange, tableTempRange, TempRange);
 }
 
 MainWindow::~MainWindow()
@@ -116,6 +119,7 @@ void MainWindow::slotTimerStatusBarAlarm()
     device.close();
     device.setTransfer(false); //Снимаем флаг, что устройство в режиме передачи
 }
+
 
 
 
