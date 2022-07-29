@@ -35,6 +35,11 @@ public:
     void setDataTableFlashMemory(void);
     void onTableFlashMemoryCell();//const QModelIndex &current,const QModelIndex &previous);
 
+    void setTableBitFlags (QTableView *tablePlace, QStandardItemModel *&tableName, const struct BITS *bits);
+    bool setDataTableBits(QStandardItemModel *&tableName, quint16 command);
+
+    void setTableFlashDetailed (QTableView *tablePlace, QStandardItemModel *&tableName, const struct FUNCTION *fun, quint8 row);
+
 private slots:
     void slotTimerStatusBarAlarm();
 
@@ -95,11 +100,17 @@ private slots:
     void on_button_DFET_On_clicked();
     void on_button_DFET_Off_clicked();
 
-
-    void setTableBitFlags (QTableView *tablePlace, QStandardItemModel *&tableName, const struct BITS *bits);
     void on_button_ReadOnceBits_clicked();
     void on_button_ReadAllTheTimeBits_clicked();
-    bool setDataTableBits(QStandardItemModel *&tableName, quint16 command);
+
+    void hideAllTabs();
+    void on_button_SBS_clicked();
+
+    void on_button_FlashCommon_clicked();
+
+    void on_button_FlashDetailed_clicked();
+
+    void on_button_Pro_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -131,6 +142,16 @@ private:
     QStandardItemModel *tableSafetyAlarm2;
     QStandardItemModel *tablePFAlarm2;
     QStandardItemModel *tableTempRange;
+
+    QStandardItemModel *table1stLevelProtection;
+    QStandardItemModel *table2ndLevelProtection;
+    QStandardItemModel *tableChargeControl;
+    QStandardItemModel *tableSystemSetting;
+    QStandardItemModel *tableSBS_Setting;
+    QStandardItemModel *tableSystemData;
+    QStandardItemModel *tableGasGauge;
+    QStandardItemModel *tableCalibration;
+    QStandardItemModel *tableLEDSupport;
 
 };
 #endif // MAINWINDOW_H

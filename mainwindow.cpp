@@ -66,15 +66,37 @@ MainWindow::MainWindow(QWidget *parent)
             SIGNAL(currentChanged(QModelIndex, QModelIndex)), this,
             SLOT(onTableFlashMemoryCellClicked(QModelIndex, QModelIndex)));
 
-    setTableBitFlags(ui->tableViewFETControl, tableFETControl, FETControl);
-    setTableBitFlags(ui->tableViewStateOfHealth, tableStateOfHealth, StateOfHealth);
-    setTableBitFlags(ui->tableViewSafetyAlarm1, tableSafetyAlarm1, SafetyAlarm1);
-    setTableBitFlags(ui->tableViewPFAlarm1, tablePFAlarm1, PFAlarm1);
-    setTableBitFlags(ui->tableViewOperationStatus, tableOperationStatus, OperationStatus);
-    setTableBitFlags(ui->tableViewChargingStatus, tableChargingStatus, ChargingStatus);
-    setTableBitFlags(ui->tableViewSafetyAlarm2, tableSafetyAlarm2, SafetyAlarm2);
-    setTableBitFlags(ui->tableViewPFAlarm2, tablePFAlarm2, PFAlarm2);
-    setTableBitFlags(ui->tableViewTempRange, tableTempRange, TempRange);
+    setTableBitFlags(ui->tableViewFETControl,       tableFETControl,        FETControl);
+    setTableBitFlags(ui->tableViewStateOfHealth,    tableStateOfHealth,     StateOfHealth);
+    setTableBitFlags(ui->tableViewSafetyAlarm1,     tableSafetyAlarm1,      SafetyAlarm1);
+    setTableBitFlags(ui->tableViewPFAlarm1,         tablePFAlarm1,          PFAlarm1);
+    setTableBitFlags(ui->tableViewOperationStatus,  tableOperationStatus,   OperationStatus);
+    setTableBitFlags(ui->tableViewChargingStatus,   tableChargingStatus,    ChargingStatus);
+    setTableBitFlags(ui->tableViewSafetyAlarm2,     tableSafetyAlarm2,      SafetyAlarm2);
+    setTableBitFlags(ui->tableViewPFAlarm2,         tablePFAlarm2,          PFAlarm2);
+    setTableBitFlags(ui->tableViewTempRange,        tableTempRange,         TempRange);
+
+    quint8 row=0;
+    row = sizeof(list_First_Level_Protection)/sizeof(list_First_Level_Protection[0]);
+    setTableFlashDetailed(ui->tableView1stLevelProtection, table1stLevelProtection, list_First_Level_Protection, row);
+    row = sizeof(list_Second_Level_Protection)/sizeof(list_Second_Level_Protection[0]);
+    setTableFlashDetailed(ui->tableView2ndLevelProtection, table2ndLevelProtection, list_Second_Level_Protection, row);
+    row = sizeof(list_Charge_Control)/sizeof(list_Charge_Control[0]);
+    setTableFlashDetailed(ui->tableViewChargeControl, tableChargeControl, list_Charge_Control, row);
+    row = sizeof(list_System_Setting)/sizeof(list_System_Setting[0]);
+    setTableFlashDetailed(ui->tableViewSystemSetting, tableSystemSetting, list_System_Setting, row);
+    row = sizeof(list_SBS_Setting)/sizeof(list_SBS_Setting[0]);
+    setTableFlashDetailed(ui->tableViewSBS_Setting, tableSBS_Setting, list_SBS_Setting, row);
+    row = sizeof(list_System_Data)/sizeof(list_System_Data[0]);
+    setTableFlashDetailed(ui->tableViewSystemData, tableSystemData, list_System_Data, row);
+    row = sizeof(list_Gas_Gauge)/sizeof(list_Gas_Gauge[0]);
+    setTableFlashDetailed(ui->tableViewGasGauge, tableGasGauge, list_Gas_Gauge, row);
+    row = sizeof(list_Calibration)/sizeof(list_Calibration[0]);
+    setTableFlashDetailed(ui->tableViewCalibration, tableCalibration, list_Calibration, row);
+    row = sizeof(list_LED_Support)/sizeof(list_LED_Support[0]);
+    setTableFlashDetailed(ui->tableViewLEDSupport, tableLEDSupport, list_LED_Support, row);
+
+    on_button_SBS_clicked();
 }
 
 MainWindow::~MainWindow()
@@ -119,7 +141,4 @@ void MainWindow::slotTimerStatusBarAlarm()
     device.close();
     device.setTransfer(false); //Снимаем флаг, что устройство в режиме передачи
 }
-
-
-
 

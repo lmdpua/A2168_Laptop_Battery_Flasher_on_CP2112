@@ -10,12 +10,14 @@ CONFIG += c++17
 
 SOURCES += \
     A2168_interface.cpp \
+    Buttons_Interface.cpp \
     Buttons_QuickCommands.cpp \
     Tab_BitFlags.cpp \
     Tab_ExtendedUnseal.cpp \
     Tab_Flash_Memory.cpp \
     Tab_Read_Write.cpp \
     Tab_Standart_SBS.cpp \
+    Tabs_Flash_Detailed.cpp \
     cp2112.cpp \
     hid_smbus_errors.cpp \
     main.cpp \

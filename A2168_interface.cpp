@@ -1,5 +1,6 @@
 #include "A2168_interface.h"
 #include <QThread>
+#include <QApplication>
 
 Progress flashWrite;
 Progress flashRead;
@@ -37,6 +38,7 @@ bool readSector(CP2112 *dev, SMBus *batt, quint8 sectorID, QByteArray *sectorArr
         quint8 val = flashRead.getProgress();
         val++;
         flashRead.setProgress(val);
+        qApp->processEvents();//Дадим выполниться другим событиям
     }
     return true;
 }
@@ -50,7 +52,7 @@ bool writeFlash(CP2112 *dev, SMBus *batt, QByteArray *flashArray, bool pec)
     for(qint8 sector=0; sector<SECTOR_AMOUNT; sector++){
         offset = sector*SECTOR_SIZE;
         sectorArray=QByteArray::fromRawData(flashArray->data()+offset, SECTOR_SIZE);
-        if(!writeSector(dev, batt, sector, &sectorArray, pec))return false;;
+        if(!writeSector(dev, batt, sector, &sectorArray, pec))return false;
     }
 
     QThread::msleep(300);
@@ -90,6 +92,7 @@ bool writeSector(CP2112 *dev, SMBus *batt, qint8 sector, QByteArray *sectorArray
         quint8 val = flashWrite.getProgress();
         val++;
         flashWrite.setProgress(val);
+        qApp->processEvents();//Дадим выполниться другим событиям
     }
     return true;
 }

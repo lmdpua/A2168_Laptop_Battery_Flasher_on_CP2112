@@ -27,28 +27,28 @@
      <item>
       <widget class="QPushButton" name="button_SBS">
        <property name="text">
-        <string>PushButton</string>
+        <string>SBS</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="button_FlashCommon">
        <property name="text">
-        <string>PushButton</string>
+        <string>Flash Common</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="button_FlashDetailed">
        <property name="text">
-        <string>PushButton</string>
+        <string>Flash Detailed</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_4">
+      <widget class="QPushButton" name="button_Pro">
        <property name="text">
-        <string>PushButton</string>
+        <string>PRO</string>
        </property>
       </widget>
      </item>
@@ -63,8 +63,11 @@
       <height>541</height>
      </rect>
     </property>
+    <property name="tabShape">
+     <enum>QTabWidget::Triangular</enum>
+    </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>13</number>
     </property>
     <property name="documentMode">
      <bool>true</bool>
@@ -78,7 +81,7 @@
        <rect>
         <x>-1</x>
         <y>6</y>
-        <width>781</width>
+        <width>791</width>
         <height>491</height>
        </rect>
       </property>
@@ -143,8 +146,8 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
-        <width>781</width>
+        <y>10</y>
+        <width>791</width>
         <height>491</height>
        </rect>
       </property>
@@ -695,6 +698,141 @@
         </layout>
        </item>
       </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_1stLevelProtection">
+     <attribute name="title">
+      <string>1st Level Protection</string>
+     </attribute>
+     <widget class="QTableView" name="tableView1stLevelProtection">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>761</width>
+        <height>497</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2ndLevelProtection">
+     <attribute name="title">
+      <string>2nd Level Protection</string>
+     </attribute>
+     <widget class="QTableView" name="tableView2ndLevelProtection">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>761</width>
+        <height>501</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_Charge_Control">
+     <attribute name="title">
+      <string>Charge Control</string>
+     </attribute>
+     <widget class="QTableView" name="tableViewChargeControl">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>761</width>
+        <height>501</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_System_Setting">
+     <attribute name="title">
+      <string>System Setting</string>
+     </attribute>
+     <widget class="QTableView" name="tableViewSystemSetting">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>761</width>
+        <height>501</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_SBS_Setting">
+     <attribute name="title">
+      <string>SBS Setting</string>
+     </attribute>
+     <widget class="QTableView" name="tableViewSBS_Setting">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>761</width>
+        <height>501</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_System_Data">
+     <attribute name="title">
+      <string>System Data</string>
+     </attribute>
+     <widget class="QTableView" name="tableViewSystemData">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>761</width>
+        <height>511</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_Gas_Gauge">
+     <attribute name="title">
+      <string>Gas Gauge</string>
+     </attribute>
+     <widget class="QTableView" name="tableViewGasGauge">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>761</width>
+        <height>501</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_Calibration">
+     <attribute name="title">
+      <string>Calibration</string>
+     </attribute>
+     <widget class="QTableView" name="tableViewCalibration">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>761</width>
+        <height>501</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_LED_Support">
+     <attribute name="title">
+      <string>LED_Support</string>
+     </attribute>
+     <widget class="QTableView" name="tableViewLEDSupport">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>761</width>
+        <height>491</height>
+       </rect>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_Read_Write">
@@ -1519,6 +1657,39 @@
       <widget class="QLineEdit" name="lineEdit_FET_Result">
        <property name="alignment">
         <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_8">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>435</y>
+      <width>101</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_Flash">
+     <item>
+      <widget class="QPushButton" name="button_InLayoutReadFlash">
+       <property name="text">
+        <string>Read Flash</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="button_InLayoutWriteFlash">
+       <property name="text">
+        <string>Write Flash</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="button_InLayourRefresh">
+       <property name="text">
+        <string>Refresh</string>
        </property>
       </widget>
      </item>
