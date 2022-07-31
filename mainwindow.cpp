@@ -142,3 +142,5 @@ void MainWindow::slotTimerStatusBarAlarm()
     device.setTransfer(false); //Снимаем флаг, что устройство в режиме передачи
 }
 
+
+

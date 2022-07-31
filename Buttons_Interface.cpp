@@ -11,7 +11,7 @@ void MainWindow::hideAllTabs()
     }
     ui->button_InLayoutReadFlash->hide();
     ui->button_InLayoutWriteFlash->hide();
-    ui->button_InLayourRefresh->hide();
+    ui->progressBarFlashDelailed->hide();
 }
 
 void MainWindow::on_button_SBS_clicked()
@@ -43,7 +43,7 @@ void MainWindow::on_button_FlashDetailed_clicked()
 
     ui->button_InLayoutReadFlash->show();
     ui->button_InLayoutWriteFlash->show();
-    ui->button_InLayourRefresh->show();
+    ui->progressBarFlashDelailed->show();
 }
 
 void MainWindow::on_button_Pro_clicked()

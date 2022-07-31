@@ -39,6 +39,7 @@ public:
     bool setDataTableBits(QStandardItemModel *&tableName, quint16 command);
 
     void setTableFlashDetailed (QTableView *tablePlace, QStandardItemModel *&tableName, const struct FUNCTION *fun, quint8 row);
+    void setDataTableFlashDetailed(QStandardItemModel *&tableName, const struct FUNCTION *fun, quint8 row);
 
 private slots:
     void slotTimerStatusBarAlarm();
@@ -105,12 +106,11 @@ private slots:
 
     void hideAllTabs();
     void on_button_SBS_clicked();
-
     void on_button_FlashCommon_clicked();
-
     void on_button_FlashDetailed_clicked();
-
     void on_button_Pro_clicked();
+
+    void on_button_InLayoutReadFlash_clicked();
 
 private:
     Ui::MainWindow *ui;

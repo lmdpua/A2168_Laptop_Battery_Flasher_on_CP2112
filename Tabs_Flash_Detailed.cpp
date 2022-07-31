@@ -1,15 +1,17 @@
 #include "mainwindow.h"
-//#include "ui_mainwindow.h"
+#include "ui_mainwindow.h"
 #include <QStandardItemModel>
 #include <QHeaderView>
+#include <QMessageBox>
 #include "A2168_interface.h"
+
+enum flashDetailedcolumnName {h_Type, h_Sector_ID, h_Offset, h_Name, h_Value, h_Unit};
 
 void MainWindow::setTableFlashDetailed (QTableView *tablePlace, QStandardItemModel *&tableName, const struct FUNCTION *fun, quint8 row)
 {
 //    quint8 row      = end - start;
     quint8 column   = 6;
-    quint8 rowHeigh = 20;
-    enum columnName {h_Type, h_Sector_ID, h_Offset, h_Name, h_Value, h_Unit};
+    quint8 rowHeigh = 20;    
 
     tableName = new QStandardItemModel(row,column,this);    //Создадим модель таблицы
     tablePlace->setModel(tableName);                          //Установим модель
@@ -21,8 +23,8 @@ void MainWindow::setTableFlashDetailed (QTableView *tablePlace, QStandardItemMod
     tablePlace->setColumnWidth(0, 140);           //Ширина первого(нулевого) столбца
     tablePlace->setColumnWidth(1, 50);
     tablePlace->setColumnWidth(2, 50);
-    tablePlace->setColumnWidth(3, 200);
-    tablePlace->setColumnWidth(4, 110);
+    tablePlace->setColumnWidth(3, 150);
+    tablePlace->setColumnWidth(4, 200);
     tablePlace->setColumnWidth(5, 50);
 
     tableName->setHeaderData(0, Qt::Horizontal, "Type");        //Проименуем столбцы
@@ -92,4 +94,132 @@ void MainWindow::setTableFlashDetailed (QTableView *tablePlace, QStandardItemMod
     commonHeigh+=tablePlace->horizontalHeader()->height();//Плюс высота заголовка
     commonHeigh+=2;
     tablePlace->setMaximumHeight(commonHeigh);//Установим максимальную высоту
+}
+
+void MainWindow::on_button_InLayoutReadFlash_clicked()
+{
+    connect(&flashRead, SIGNAL(progressChanged(int)),ui->progressBarFlashDelailed, SLOT(setValue(int)));
+    while(device.isInTransferMode()){} //Ждем пока закончится передача
+
+    device.setTransfer(true);//Поставим флаг, что устройство в режиме передачи
+    if(!device.init()){
+        device.close();
+        device.setTransfer(false);
+        return;
+    }
+    if(!battery.isConnected(&device)){
+        QMessageBox::critical(this,"Error","Battery not found");
+        return;
+    }
+
+    flashData->clear();//Очистим массив
+
+    if(readFlash(&device,&battery,flashData)){
+        quint8 row = 0;
+
+        row = sizeof(list_First_Level_Protection)/sizeof(list_First_Level_Protection[0]);
+        setDataTableFlashDetailed(table1stLevelProtection, list_First_Level_Protection, row);
+
+        row = sizeof(list_Second_Level_Protection)/sizeof(list_Second_Level_Protection[0]);
+        setDataTableFlashDetailed(table2ndLevelProtection, list_Second_Level_Protection, row);
+
+        row = sizeof(list_Charge_Control)/sizeof(list_Charge_Control[0]);
+        setDataTableFlashDetailed(tableChargeControl, list_Charge_Control, row);
+
+        row = sizeof(list_System_Setting)/sizeof(list_System_Setting[0]);
+        setDataTableFlashDetailed(tableSystemSetting, list_System_Setting, row);
+
+        row = sizeof(list_SBS_Setting)/sizeof(list_SBS_Setting[0]);
+        setDataTableFlashDetailed(tableSBS_Setting, list_SBS_Setting, row);
+
+        row = sizeof(list_System_Data)/sizeof(list_System_Data[0]);
+        setDataTableFlashDetailed(tableSystemData, list_System_Data, row);
+
+        row = sizeof(list_Gas_Gauge)/sizeof(list_Gas_Gauge[0]);
+        setDataTableFlashDetailed(tableGasGauge, list_Gas_Gauge, row);
+
+        row = sizeof(list_Calibration)/sizeof(list_Calibration[0]);
+        setDataTableFlashDetailed(tableCalibration, list_Calibration, row);
+
+        row = sizeof(list_LED_Support)/sizeof(list_LED_Support[0]);
+        setDataTableFlashDetailed(tableLEDSupport, list_LED_Support, row);
+
+        QMessageBox::information(this,"Success","Flash read successfully");
+        flashArrayIsFull = true;
+
+    }else{
+        QMessageBox::critical(this,"Error","Flash read fault");
+        flashArrayIsFull = false;
+    }
+
+    device.close();
+    device.setTransfer(false);//снимем флаг, что устройство в режиме передачи
+//    connect(ui->tableViewFlashMemory->model(),
+//            SIGNAL(dataChanged(QModelIndex, QModelIndex)), this,
+//            SLOT(onTableFlashMemoryCellChanded(QModelIndex, QModelIndex)));
+
+//    connect(ui->lineEdit_Data, SIGNAL(returnPressed()), this, SLOT(flashMemorySaveToCell()));
+    disconnect(&flashRead, SIGNAL(progressChanged(int)),ui->progressBarFlashDelailed, SLOT(setValue(int)));
+}
+
+void MainWindow::setDataTableFlashDetailed(QStandardItemModel *&tableName, const struct FUNCTION *fun, quint8 row)
+{
+    QModelIndex indexValue;
+    quint8      sector      = 0;
+    quint16     offset      = 0;
+    quint8      type        = 0;
+    qint64      data        = 0;
+    QString     str;
+
+    for(quint8 i=0; i<row; i++){
+        indexValue = tableName->index(i,h_Value);
+        sector = fun[i].id;
+        offset = sector*SECTOR_SIZE + fun[i].offset.toUInt();
+        type = fun[i].data_type;
+        switch(type){
+        case I1:
+            data = flashData->at(offset);
+            tableName->setData(indexValue, data);     //Вставим строку Value
+            break;
+        case I2:
+            data = (qint16)((quint8)flashData->at(offset) << 8) | (quint8)(flashData->at(offset + 1));
+            tableName->setData(indexValue, data);     //Вставим строку Value
+            break;
+        case I4:
+            data =  ((quint8)flashData->at(offset)      << 24) |
+                    ((quint8)flashData->at(offset + 1 ) << 16) |
+                    ((quint8)flashData->at(offset + 1 ) << 8 ) |
+                    ((quint8)flashData->at(offset + 1 ));
+            tableName->setData(indexValue, (qint64)data);     //Вставим строку Value
+            break;
+        case U1:
+            data = (quint8)flashData->at(offset);
+            tableName->setData(indexValue, data);     //Вставим строку Value
+            break;
+        case U2:
+            data = ((quint8)flashData->at(offset) << 8) | (quint8)(flashData->at(offset + 1));
+            tableName->setData(indexValue, data);     //Вставим строку Value
+            break;
+        case H1:
+            data = (quint8)flashData->at(offset);
+            str = QString("%1").arg(data,2,16,QLatin1Char ('0')).toUpper();
+            str.prepend("0x");
+            tableName->setData(indexValue, str);     //Вставим строку Value
+            break;
+        case H2:
+            data = ((quint8)flashData->at(offset) << 8) | (quint8)(flashData->at(offset + 1));
+            str = QString("%1").arg(data,4,16,QLatin1Char ('0')).toUpper();
+            str.prepend("0x");
+            tableName->setData(indexValue, str);     //Вставим строку Value
+            break;
+        case S5:
+        case S20:
+        case S21:
+        case S32:
+            str = QString::fromLocal8Bit(flashData->data()+offset + 1,flashData->at(offset));
+            tableName->setData(indexValue, str);     //Вставим строку Value
+            break;
+        }
+        tableName->item(i,h_Value)->setTextAlignment(Qt::AlignCenter);
+    }
 }

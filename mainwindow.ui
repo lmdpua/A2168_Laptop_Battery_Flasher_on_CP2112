@@ -67,7 +67,7 @@
      <enum>QTabWidget::Triangular</enum>
     </property>
     <property name="currentIndex">
-     <number>13</number>
+     <number>3</number>
     </property>
     <property name="documentMode">
      <bool>true</bool>
@@ -1687,9 +1687,12 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="button_InLayourRefresh">
-       <property name="text">
-        <string>Refresh</string>
+      <widget class="QProgressBar" name="progressBarFlashDelailed">
+       <property name="maximum">
+        <number>65</number>
+       </property>
+       <property name="value">
+        <number>0</number>
        </property>
       </widget>
      </item>

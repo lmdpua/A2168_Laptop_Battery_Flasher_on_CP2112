@@ -357,7 +357,7 @@ const FUNCTION list_SBS_Setting []=
     {SECTOR_1,	DATA,           4,      "Init Battery Mode",            H2,     0x0,	0xffff,	0x81,       "-"     },
     {SECTOR_1,	DATA,           6,      "Design Voltage",               I2,     7000,	18000,	14400,      "mV"    },
     {SECTOR_1,	DATA,           8,      "Spec Info",                    H2,     0x0,	0xffff,	0x31,       "-"     },
-    {SECTOR_1,	DATA,           10,     "Manuf Date",                   U2,     0,      65535,	0,          "Day + Mo*32 +(Yr-1980)*256 (date)"   },
+    {SECTOR_1,	DATA,           10,     "Manuf Date",                   U2,     0,      65535,	0,          "Day+Mo*32+(Yr-1980)*256"   },
     {SECTOR_1,	DATA,           12,     "Ser. Num.",                    H2,     0x0000,	0xffff,	0x1,        "-"     },
     {SECTOR_1,	DATA,           16,     "CC Threshold",                 I2,     100,	32767,	4400,       "mAh"   },
     {SECTOR_3,	DATA,           18,     "Cycle Count",                  U2,     0,      65535,	0,          "-"     },
